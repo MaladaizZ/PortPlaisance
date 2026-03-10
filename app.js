@@ -1,12 +1,21 @@
-var express = require('express');
+const express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const app = express();
+
+// method pour utliser swagger pour la doc :
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs' , swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//fin de la methode swagger
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());

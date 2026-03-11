@@ -3,9 +3,15 @@ const router = express.Router();
 const service = require('../services/users');
 
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// mise en place du CRUD 
+
+router.get('/:id', service.getById);
+
+router.put('/add', service.add);
+
+router.patch('/:id', service.update);
+
+router.delete('/:id', service.delete);
+
 
 module.exports = router;

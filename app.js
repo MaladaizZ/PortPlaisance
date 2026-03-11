@@ -1,7 +1,8 @@
 const express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors'); // authorise les domaines et sous-domaines a send requete a l API
 
 const app = express();
 
@@ -13,17 +14,35 @@ app.use('/api-docs' , swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //fin de la methode swagger
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// connection a mongo :
+const mongodb = require('mongodb');
+mongodb.initClientDbConnection();
 
+
+const indexRouter = require('./routes/index');
+
+app.use(cors({
+    exposedHeaders : ['Authorization'],
+    origin : '*'
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
+//si requete sur route inexistante : 
+app.use(function(req,res, next) {
+    res.statu(404).json({name: 'API', version: '1.0', status:404, message:'not_found'});
+});
+
+//Middlewares pour le traitements des erreurs global
+app.use(function(err,req,res,next){
+    console.error(err.stack);
+    res.status(500).send("une erreur s'est produite");
+});
+
 
 module.exports = app;

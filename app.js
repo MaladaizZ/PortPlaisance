@@ -5,19 +5,19 @@ const logger = require('morgan');
 const cors = require('cors'); // authorise les domaines et sous-domaines a send requete a l API
 
 const app = express();
-
+const path = require('path');
 // method pour utliser swagger pour la doc :
-const swaggerUi = require('swagger-ui-express');
+/*const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-app.use('/api-docs' , swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs' , swaggerUi.serve, swaggerUi.setup(swaggerDocument));*/
 //fin de la methode swagger
 
 
 // connection a mongo :
-const mongodb = require('mongodb');
-mongodb.initClientDbConnection();
+const mongodb = require('./db/mongodb');
 
+mongodb.initClientDbConnection();
 
 const indexRouter = require('./routes/index');
 

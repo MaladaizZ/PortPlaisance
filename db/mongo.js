@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const clientOptions = {
-    useNewUrlParser : true,
-    dbName : 'esssai'
+    dbName : 'esssai',
 };
  // methode de connection pour Mongo Cloud :
 exports.initClientDbConnection = async () => {

@@ -1,17 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const service = require('../services/users');
-
+const private = require('../middlewares/privates');
 
 // mise en place du CRUD 
 
-router.get('/:id', service.getById);
+router.get('/:id',private.checkJWT, service.getById);
 
-router.put('/add', service.add);
+router.post('/add', service.add);
 
-router.patch('/:id', service.update);
+router.patch('/:id',private.checkJWT, service.update);
 
-router.delete('/:id', service.delete);
+router.delete('/:id',private.checkJWT, service.delete);
 
+// route authenticate
+router.post('/authenticate', service.authenticate);
 
 module.exports = router;

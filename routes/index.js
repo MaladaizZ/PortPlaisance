@@ -1,6 +1,10 @@
-var express = require('express');
-var router = express.Router();
-const userRoute = require('../routes/users')
+const express = require('express');
+const router = express.Router();
+const userRouter = require('../routes/users')
+const app = express();
+
+
+app.use('/',userRouter )
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,7 +21,7 @@ router.get('/', async(req, res) =>{
 });
 
 //contient les routes propres aux users : 
-router.use('/users', userRoute);
+router.use('/users', userRouter);
 
 
 module.exports = router;

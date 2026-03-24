@@ -6,6 +6,10 @@ const cors = require('cors'); // authorise les domaines et sous-domaines a send 
 const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users')
+
+
 // method pour utliser swagger pour la doc :
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -26,7 +30,8 @@ mongoose.connect('mongodb://localhost:27017/PortPlaisance', {})
 
 
 
-const indexRouter = require('./routes/index');
+
+
 
 app.use(cors({
     exposedHeaders : ['Authorization'],
@@ -34,15 +39,23 @@ app.use(cors({
 }));
 
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json());// pour lire le json
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
+// pour avoir view en front : 
+app.set('view engine', 'ejs'); 
+app.set('views', path.join(__dirname, 'views'));
+
+
+//methode pour les routes : 
 app.use('/', indexRouter);
+app.use('/users', usersRouter)
 
 //si requete sur route inexistante : 
-app.use(function(req,res, next) {
-    res.status(404).json({name: 'API', version: '1.0', status:404, message:'not_found'});
+app.use(function(req,res, ) {
+    res.status(404).json({name: 'API', version: '1.0', status:404, message:'routes_not_found_mon_ami'});
 });
 
 //Middlewares pour le traitements des erreurs global
@@ -51,7 +64,7 @@ app.use(function(err,req,res,next){
     res.status(500).send("une erreur s'est produite");
 });
 
-app.use(express.json()); // pour lire le JSON
 
 
 module.exports = app;
+

@@ -7,7 +7,7 @@ const User = new Schema({
     name: {
         type: String,
         trim : true,
-        require: [true, 'Le nom est requis']
+        required: [true, 'Le nom est requis']
     },
     firstname : {
         type : String,
@@ -30,13 +30,12 @@ const User = new Schema({
 
 //hash le mot de passe quand il est modifié :
 
-User.pre('save', function(next) {
+User.pre('save', async function() {
     if (!this.isModified('password')) {
-        return next ()
+        return;
     }
     this.password = bcrypt.hashSync(this.password, 10);
 
-    next();
 });
 
-module.exports = mongoose.model('User' , User);
+module.exports = mongoose.model('User', User);

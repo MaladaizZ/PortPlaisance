@@ -31,32 +31,14 @@ exports.add = async (req, res, next) => {
         catwayType:   req.body.catwayType,
         catwayState:  req.body.catwayState
     };
-        try {
-            let catway = await Catway.findOne({_id : id});
-    
-            if (user) {
-                Object.keys(temp).forEach((key) =>{
-                    if (!!temp[key]) {
-                        user[key] = temp[key];
-                    }
-                });
-    
-                await user.save();
-                return res.status(201).json(user);
-            }
-    
-            return res.status(404).json('user_not_found'); 
-        } catch (error) {
-            return res.status(501).json(error);
-        }
-    }
-    try {
+     try {
         let catway = await Catway.create(temp);
         return res.status(201).json(catway);
     } catch (error) {
         return res.status(501).json(error);
     }
-;
+};
+
 
 // PATCH modifier un catway
 exports.update = async (req, res, next) => {

@@ -30,11 +30,6 @@ mongoose.connect('mongodb://localhost:27017/PortPlaisance', {})
 .catch((err)=> console.error('Connection ratey :', err));
  
 
-app.use('/catways', catwaysRouter);
-
-
-
-
 app.use(cors({
     exposedHeaders : ['Authorization'],
     origin : '*'
@@ -53,7 +48,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 //methode pour les routes : 
 app.use('/', indexRouter);
-app.use('/users', usersRouter)
+app.use('/users', usersRouter);
+app.use('/catways', catwaysRouter);
 
 //si requete sur route inexistante : 
 app.use(function(req,res, ) {

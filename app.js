@@ -7,7 +7,9 @@ const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users')
+const usersRouter = require('./routes/users');
+const catwaysRouter = require('./routes/catways');
+
 
 
 // method pour utliser swagger pour la doc :
@@ -28,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/PortPlaisance', {})
 .catch((err)=> console.error('Connection ratey :', err));
  
 
-
+app.use('/catways', catwaysRouter);
 
 
 

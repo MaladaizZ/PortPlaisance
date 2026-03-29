@@ -4,13 +4,13 @@ const userRouter = require('../routes/users')
 const app = express();
 
 
-app.use('/',userRouter )
+/*app.use('/',userRouter )
 
-/* GET home page. */
+ GET home page. 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
+*/
 router.get('/', async(req, res) =>{
   res.status(200).json({
     name : process.env.APP_NAME,

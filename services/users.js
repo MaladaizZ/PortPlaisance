@@ -44,9 +44,9 @@ exports.update = async (req, res, next) => {
     const id = req.params.id 
     const temp = ({
         name : req.body.name,
-        firtsname : req.body.firstname,
+        firstname : req.body.firstname,
         email : req.body.email,
-        password : req.password
+        password : req.body.password
     });
 
     try {
@@ -94,7 +94,7 @@ exports.authenticate = async ( req, res,)=> {
         if (user) {
             bcrypt.compare(password, user.password, function(err, response) {
                 if(err) {
-                    throw new Error(error)
+                    throw new Error(err)
                 }
                 if (response) {
                     delete user._doc.password;

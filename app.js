@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 
 const cookieParser = require('cookie-parser');
@@ -22,13 +24,14 @@ app.use('/api-docs' , swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connection a mongo :
 /*const mongodb = require('./db/mongo');
-mongodb.initClientDbConnection();*/ 
-
+mongodb.initClientDbConnection();
+*/
 // mongo local :
 mongoose.connect('mongodb://localhost:27017/PortPlaisance', {})
 .then(()=> console.log('Connecté Avec Succes'))
 .catch((err)=> console.error('Connection ratey :', err));
  
+
 
 app.use(cors({
     exposedHeaders : ['Authorization'],
@@ -39,6 +42,9 @@ app.use(logger('dev'));
 app.use(express.json());// pour lire le json
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// pour utiliser les fichiers static :
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 // pour avoir view en front : 

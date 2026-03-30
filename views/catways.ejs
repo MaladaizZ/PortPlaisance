@@ -1,0 +1,60 @@
+<%- include('../partials/header', { user: user }) %>
+
+<h1>Gestion des Catways</h1>
+
+<!-- Formulaire ajout -->
+<h2>Ajouter un catway</h2>
+<form action="/catways" method="POST">
+  <label>Numéro</label>
+  <input type="number" name="catwayNumber" required>
+
+  <label>Type</label>
+  <select name="catwayType">
+    <option value="long">Long</option>
+    <option value="short">Short</option>
+  </select>
+
+  <label>État</label>
+  <input type="text" name="catwayState" required>
+
+  <button type="submit">Ajouter</button>
+</form>
+
+<!-- Liste -->
+<h2>Liste des catways</h2>
+<% if (catways.length === 0) { %>
+  <p>Aucun catway enregistré.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Numéro</th>
+        <th>Type</th>
+        <th>État</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% catways.forEach(c => { %>
+        <tr>
+          <td><%= c.catwayNumber %></td>
+          <td><%= c.catwayType %></td>
+          <td><%= c.catwayState %></td>
+          <td>
+            <!-- Modifier -->
+            <form action="/catways/<%= c._id %>?_method=PUT" method="POST" style="display:inline">
+              <input type="text" name="catwayState" placeholder="Nouvel état" style="width:auto">
+              <button type="submit">Modifier</button>
+            </form>
+            <!-- Supprimer -->
+            <form action="/catways/<%= c._id %>?_method=DELETE" method="POST" style="display:inline">
+              <button type="submit" class="danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

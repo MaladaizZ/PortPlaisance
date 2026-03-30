@@ -1,0 +1,49 @@
+<%- include('../partials/header', { user: user }) %>
+
+<h1>Gestion des Utilisateurs</h1>
+
+<!-- Formulaire ajout -->
+<h2>Ajouter un utilisateur</h2>
+<form action="/users" method="POST">
+  <label>Nom</label>
+  <input type="text" name="name" required>
+
+  <label>Email</label>
+  <input type="email" name="email" required>
+
+  <label>Mot de passe</label>
+  <input type="password" name="password" required>
+
+  <button type="submit">Ajouter</button>
+</form>
+
+<!-- Liste -->
+<h2>Liste des utilisateurs</h2>
+<% if (users.length === 0) { %>
+  <p>Aucun utilisateur enregistré.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(u => { %>
+        <tr>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td>
+            <form action="/users/<%= u._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

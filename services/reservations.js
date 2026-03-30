@@ -5,7 +5,7 @@ exports.getAll = async (req, res, next) => {
     const catwayNumber = req.params.id ;
     try {
         let reservations = await Reservation.find({ catwayNumber: catwayNumber});
-        return res.status(200).json('reservations');
+        return res.status(200).json(reservations);
         } catch(error) {
             return res.status(501).json('aucune reservations');
         }
@@ -15,11 +15,11 @@ exports.getAll = async (req, res, next) => {
 exports.getById = async (req, res, next) => {
     const idReservation = req.params.idReservation; 
     try {
-        let reservation = await Reservation.findById(idReservtaion);
+        let reservation = await Reservation.findById(idReservation);
         if (reservation) {
-            return res.status(201).json(reservation);
+            return res.status(200).json(reservation);
         }
-        return res.status(401).json('pas_de_reservation_trouver');
+        return res.status(401).json('reservation_not_found');
     } catch (error) {
         return res.status(501).json(error);
     }

@@ -1,8 +1,104 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* === RESET & BASE === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  font-size: 16px;
 }
+
+/* === NAVIGATION === */
+nav {
+  background-color: #1a3c5e;
+  padding: 12px 24px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* === CONTENEUR PRINCIPAL === */
+main {
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* === TITRES === */
+h1 { font-size: 1.8rem; margin-bottom: 20px; }
+h2 { font-size: 1.4rem; margin-bottom: 15px; }
+
+/* === FORMULAIRES === */
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #1a3c5e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover { background-color: #255a8e; }
+
+
+
+/* === TABLEAUX === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+th {
+  background-color: #1a3c5e;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+}
+

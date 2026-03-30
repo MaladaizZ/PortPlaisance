@@ -1,0 +1,61 @@
+<%- include('../partials/header', { user: user }) %>
+
+<h1>Gestion des Réservations</h1>
+
+<!-- Formulaire ajout -->
+<h2>Ajouter une réservation</h2>
+<form action="/reservations" method="POST">
+  <label>Numéro de catway</label>
+  <input type="number" name="catwayNumber" required>
+
+  <label>Nom du client</label>
+  <input type="text" name="clientName" required>
+
+  <label>Nom du bateau</label>
+  <input type="text" name="boatName" required>
+
+  <label>Date de début</label>
+  <input type="date" name="startDate" required>
+
+  <label>Date de fin</label>
+  <input type="date" name="endDate" required>
+
+  <button type="submit">Ajouter</button>
+</form>
+
+<!-- Liste -->
+<h2>Liste des réservations</h2>
+<% if (reservations.length === 0) { %>
+  <p>Aucune réservation enregistrée.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Catway N°</th>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reservations.forEach(r => { %>
+        <tr>
+          <td><%= r.catwayNumber %></td>
+          <td><%= r.clientName %></td>
+          <td><%= r.boatName %></td>
+          <td><%= new Date(r.startDate).toLocaleDateString('fr-FR') %></td>
+          <td><%= new Date(r.endDate).toLocaleDateString('fr-FR') %></td>
+          <td>
+            <form action="/reservations/<%= r._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

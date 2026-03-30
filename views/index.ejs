@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port de Plaisance - Accueil</title>
+      <link rel="stylesheet" href="/public/stylesheets/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1> Port Plaisance</h1>
+        <p class="description">
+            Bienvenue sur l'application de gestion de la capitainerie.<br>
+            Connectez-vous pour accéder au tableau de bord.
+        </p>
+
+        <!-- Message d'erreur si login raté -->
+        <% if (typeof error !== 'undefined') { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+
+        <!-- Formulaire de connexion -->
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="votre@email.com" 
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="••••••••" 
+                    required
+                />
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
+
+        <!-- Lien vers la doc API -->
+        <div class="doc-link">
+            <a href="/api-docs" target="_blank">📖 Documentation de l'API</a>
+        </div>
+    </div>
+</body>
+</html>

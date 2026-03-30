@@ -16,7 +16,7 @@ const Reservation = new Schema({
         trim: true,
         required: [true, 'le nom du bateau est requis']
     },
-    startdate : {
+    startDate : {
         type: Date,
         required: [true,'date de debut requis']
     },
